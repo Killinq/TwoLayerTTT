@@ -22,6 +22,7 @@
 			{
 				table-layout: fixed;
 				background-color: white;
+				font-size: 15pt;
 				width: 100px;
 				height: 100px;
 			}
@@ -63,6 +64,17 @@
 			{
 				color: rgb(255, 0, 43);
 			}
+			#reset
+			{
+				color: white;
+				background-color: rgb(255, 0, 43);
+			}
+			#resetDiv
+			{
+				text-align: center;
+				display: none;
+			}
+			
 		</style>
 		<script> 
 			function init(selection)
@@ -86,6 +98,7 @@
 				var hidden = document.getElementsByClassName("choiceDiv");
 				for (var i = 0; i < hidden.length; i++)
 					hidden[i].style.display = "none";
+				document.getElementById("resetDiv").style.display = "block";
 			}
 			function choiceO()
 			{
@@ -97,7 +110,8 @@
 				var hidden = document.getElementsByClassName("choiceDiv");
 				for (var i = 0; i < hidden.length; i++)
 					hidden[i].style.display = "none";
-					
+				document.getElementById("resetDiv").style.display = "block";
+
 				setCellOpposite();
 			}
 			function setCell(cellID)
@@ -291,7 +305,26 @@
 				var randomCell = empty[Math.floor(Math.random() * empty.length)];
 				return [randomCell, empty];
 			}
-
+			function reset()
+			{
+				for(var i = 0; i < cellsArray.length; i++)
+				{
+					cellsArray[i].innerHTML = "";
+					clickedCellsArray = [];
+					clickedNumberArray[i] = 0;
+					clickedNumberArrayO[i] = 0;
+					turn = 0;
+					playerChoice = "";
+					playerChoiceOpposite = "";
+				}
+				document.getElementById("table").style.display = "none";
+				document.getElementById("win").style.display = "none";
+				document.getElementById("lose").style.display = "none";
+				var hidden = document.getElementsByClassName("choiceDiv");
+				for (var i = 0; i < hidden.length; i++)
+					hidden[i].style.display = "block";
+				document.getElementById("resetDiv").style.display = "none";
+			}
 			
 		</script>
 	</head>
@@ -322,5 +355,9 @@
 	<div class = "choiceDiv">
 		<button id = "X" onclick = "choiceX();">X</button>
 		<button id = "O" onclick = "choiceO();">O</button>
+		
+	</div>
+	<div id = "resetDiv">
+		<button id = "reset" onclick = "reset()">Reset</button>
 	</div>
 </html>
